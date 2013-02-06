@@ -50,10 +50,17 @@ $(function() {
 
         var html = tmpl({"exercises": exercises});
 
-        $("body").append(html);
+        // $("body").append(html);
 
         // add to DOM
         $("#exercise-table-holder").append(html);
+
+        // add listjs goodness
+        var options = {
+            valueNames: ["display-name", "creation-date", "filename", "author-name"]
+        };
+
+        var exerciseList = new List("exercise-list", options);
 
         // add DataTables goodness
         // $("#exercise-table").dataTable();
