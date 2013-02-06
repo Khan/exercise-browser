@@ -25,24 +25,26 @@
             width: 600px;
             padding: 20px;
         }
-        .thumb-holder {
+        .thumbnail {
             float: left;
-            width: 256px;
             height: 310px;
             display: inline-block;
-            margin: 10px;
             border-radius: 10px;
+            border: 0;
+            padding: 0;
             background: #444;
             box-shadow: 2px 2px 10px #555;
         }
-        .thumb-holder .caption {
+
+        .thumbnail .caption {
             box-sizing: border-box;
-            width: 100%;
+            width: 256px;
             color: #AEBEC6;
             padding: 4px 10px;
             font-size: 16px;
             word-wrap: break-word;
         }
+
         .creation-date, .author-name {
             display: none;
         }
@@ -64,15 +66,17 @@
                     <button class="sort btn btn-success" data-sort="creation-date">Sort by date</button>
                 </div>
             </div>
-            <ul class="list">
+            <ul class="list thumbnails">
                 {{#each exercises}}
-                <li class="thumb-holder">
-                    <img class="thumb img-rounded" src="{{image_url_256}}"/>
-                    <div class="caption">
-                        <p class="display-name">{{display_name}}</p>
-                        <p class="creation-date">{{creation_date}}</p>
-                        <p class="author-name">{{author_name}}</p>
-                        <p class="topic"></p>
+                <li class="span4">
+                    <div class="thumbnail">
+                        <img src="{{image_url_256}}" alt=""/>
+                        <div class="caption">
+                            <p class="display-name">{{display_name}}</p>
+                            <p class="creation-date">{{creation_date}}</p>
+                            <p class="author-name">{{author_name}}</p>
+                            <p class="topic"></p>
+                        </div>
                     </div>
                 </li>
                 {{/each}}
