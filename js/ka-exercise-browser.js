@@ -3,10 +3,10 @@ $(function() {
     var url = "http://www.khanacademy.org/api/v1/" + key;
 
     // handlebars stuff
-    var source = $("#exercise-table-template").html();
-    var tmpl = Handlebars.compile(source);
+    var tableTmpl = Handlebars.compile($("#exercise-table-tmpl").html());
+    var thumbTmpl = Handlebars.compile($("#exercise-thumb-tmpl").html());
 
-    var iframe = $("#exercise-preview");
+    // var iframe = $("#exercise-preview");
 
     var fetchData = function() {
         console.log("fetch data called");
@@ -39,6 +39,8 @@ $(function() {
         });
     };
 
+    var tmpl = thumbTmpl;
+
     var loadData = function() {
         var exercises = $.jStorage.get(key);
         if (!exercises) {
@@ -48,16 +50,18 @@ $(function() {
 
         var html = tmpl({"exercises": exercises});
 
+        $("body").append(html);
+
         // add to DOM
         $("#exercise-table-holder").append(html);
 
         // add DataTables goodness
-        $("#exercise-table").dataTable();
+        // $("#exercise-table").dataTable();
 
-        // bind click handler to preview-links
-        $("body").on("click", ".preview-link", function() {
-            iframe.attr("src", $(this).data("url"));
-        });
+        // // bind click handler to preview-links
+        // $("body").on("click", ".preview-link", function() {
+        //     iframe.attr("src", $(this).data("url"));
+        // });
     };
 
     loadData();

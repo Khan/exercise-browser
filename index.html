@@ -8,15 +8,38 @@
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
 
+    <script src="js/list.min.js"></script>
+
     <script src="js/underscore-min.js"></script>
+    <script src="js/backbone-min.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/jstorage.js"></script>
-    <script src="js/moment.min.js"></script>
 
     <script src="js/ka-exercise-browser.js"></script>
+    <style type="text/css">
+        .thumb-holder {
+            float: left;
+            display: inline-block;
+            margin: 20px;
+        }
+        .thumb {
+            display: block;
+        }
+        .filename {
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-    <script id="exercise-table-template" type="text/x-handlebars-template">
+    <script id="exercise-thumb-tmpl" type="text/x-handlebars-template">
+        {{#each exercises}}
+        <div class="thumb-holder">
+            <img class="thumb" src="{{image_url_256}}"/>
+            <div class="filename">{{guaranteed_file_name}}</div>
+        </div>
+        {{/each}}
+    </script>
+    <script id="exercise-table-tmpl" type="text/x-handlebars-template">
         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="exercise-table">
             <thead>
                 <tr>
@@ -43,6 +66,5 @@
 </body>
     <div class="container-fluid">
         <div id="exercise-table-holder"></div>
-        <iframe width="1000px" height="600px" id="exercise-preview" src=""></iframe>
     </div>
 </html>
