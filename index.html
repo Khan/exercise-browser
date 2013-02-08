@@ -60,16 +60,24 @@
         <div id="exercise-list">
             <div class="controls">
                 <div class="input-append">
-                    <input type="text" class="search span4" placeholder="Type something..." />
-                    <button class="sort btn btn-info" data-sort="display-name">Sort by title</button>
-                    <button class="sort btn btn-success" data-sort="creation-date">Sort by date</button>
+                    <input type="text" class="search-fuzzy span4" placeholder="Type something..." />
+                    <button class="sort btn btn-info" data-sort="display-name">
+                        Sort by title
+                        <span class="caret"></span>
+                    </button>
+                    <button class="sort btn btn-success" data-sort="creation-date">
+                        Sort by date
+                        <span class="caret"></span>
+                    </button>
                 </div>
             </div>
             <ul class="list thumbnails">
                 {{#each exercises}}
                 <li class="span4">
                     <div class="thumbnail">
-                        <img src="{{image_url_256}}" alt=""/>
+                        <a data-toggle="modal" href="khan-exercises/exercises/{{guaranteed_file_name}}" data-target="#myModal">
+                            <img src="{{image_url_256}}" alt=""/>
+                        </a>
                         <div class="caption">
                             <p class="display-name">{{display_name}}</p>
                             <p class="creation-date">{{creation_date}}</p>

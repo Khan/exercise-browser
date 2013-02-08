@@ -57,10 +57,17 @@ $(function() {
 
         // add listjs goodness
         var options = {
-            valueNames: ["display-name", "creation-date", "filename", "author-name"]
+            valueNames: ["display-name", "creation-date", "author-name"],
+            plugins: [
+                [ "fuzzySearch" ]
+            ]
         };
 
         var exerciseList = new List("exercise-list", options);
+
+        $(".search-fuzzy").keyup(function() {
+            exerciseList.fuzzySearch($(this).val());
+        });
 
         // add DataTables goodness
         // $("#exercise-table").dataTable();
