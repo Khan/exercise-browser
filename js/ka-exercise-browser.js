@@ -65,8 +65,47 @@ $(function() {
 
         var exerciseList = new List("exercise-list", options);
 
-        $(".search-fuzzy").keyup(function() {
+        var searchbar = $(".search");
+
+        searchbar.keyup(function() {
             exerciseList.fuzzySearch($(this).val());
+        });
+
+        searchbar.typeahead({
+            source: _.pluck(exercises, "display_name")
+        });
+
+        var preview = $("#myModal");
+        var modalTitle = $("#myModalLabel");
+        var iframe = $("iframe.exercise-preview");
+        var baseUrl = "/khan-exercises/exercises/";
+        var body = $("body");
+
+        preview.modal({
+            show: false
+        });
+
+        $(".thumbnails").on("click", ".thumbnail", function(e) {
+            var relativeUrl = $(this).data("filename");
+            iframe.attr("src", baseUrl + relativeUrl + "?debug");
+
+            var title = $(this).data("name");
+            modalTitle.html(title);
+            preview.modal("show");
+        });
+
+        var modalCover = $(".modal-body-cover");
+
+        modalCover.on("scroll", function(e){
+            e.preventDefault();
+        });
+
+        preview.on("shown", function() {
+            body.css({ overflow: "hidden" });
+        });
+
+        preview.on("hidden", function() {
+            body.css({ overflow: "inherit" });
         });
 
         // add DataTables goodness

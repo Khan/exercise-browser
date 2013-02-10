@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
     <script src="js/list.js"></script>
-    <script src="js/list.fuzzySearch.min.js"></script>
+    <script src="js/list.fuzzySearch.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
     <script src="js/underscore-min.js"></script>
@@ -24,6 +24,11 @@
             width: 600px;
             padding: 20px;
         }
+
+        .span4 {
+            width: 250px; /* remove when we have bigger screenshots */
+        }
+
         .thumbnail {
             float: left;
             height: 310px;
@@ -44,7 +49,11 @@
             word-wrap: break-word;
         }
 
-        .creation-date, .author-name {
+        .creation-date {
+            font-size: 13px;
+        }
+
+        .author-name {
             display: none;
         }
         .thumb {
@@ -53,6 +62,26 @@
         .filename {
             font-size: 14px;
         }
+
+        #myModal {
+            top: 3%;
+            width: 800px;
+            height: 650px;
+            margin-left: -400px;
+        }
+
+        .modal-body {
+            max-height: 600px;
+            width: 780px;
+            padding: 0 20px;
+            position: absolute;
+        }
+
+        iframe.exercise-preview {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
     </style>
 </head>
 <body>
@@ -60,7 +89,7 @@
         <div id="exercise-list">
             <div class="controls">
                 <div class="input-append">
-                    <input type="text" class="search-fuzzy span4" placeholder="Type something..." />
+                    <input type="text" class="search span4" placeholder="Type something..." />
                     <button class="sort btn btn-info" data-sort="display-name">
                         Sort by title
                         <span class="caret"></span>
@@ -74,10 +103,8 @@
             <ul class="list thumbnails">
                 {{#each exercises}}
                 <li class="span4">
-                    <div class="thumbnail">
-                        <a data-toggle="modal" href="khan-exercises/exercises/{{guaranteed_file_name}}" data-target="#myModal">
-                            <img src="{{image_url_256}}" alt=""/>
-                        </a>
+                    <div class="thumbnail" data-name="{{display_name}}" data-filename="{{guaranteed_file_name}}">
+                        <img src="{{image_url_256}}" alt=""/>
                         <div class="caption">
                             <p class="display-name">{{display_name}}</p>
                             <p class="creation-date">{{creation_date}}</p>
@@ -88,6 +115,16 @@
                 </li>
                 {{/each}}
             </ul>
+        </div>
+
+        <div id="myModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 id="myModalLabel"></h3>
+          </div>
+          <div class="modal-body">
+            <iframe seamless width="780" height="600" class="exercise-preview" src="" />
+          </div>
         </div>
     </script>
     <script id="exercise-table-tmpl" type="text/x-handlebars-template">
@@ -116,6 +153,7 @@
     </script>
 </body>
     <div class="container-fluid">
+        <div id="testload"></div>
         <div id="exercise-table-holder"></div>
     </div>
 </html>
