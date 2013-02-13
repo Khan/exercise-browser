@@ -1,6 +1,7 @@
 $(function() {
     var key = "exercises";
-    var url = "http://www.khanacademy.org/api/v1/" + key;
+    var site = "http://www.khanacademy.org"; // znd-exercises-topics-dot-khan-academy.appspot.com
+    var url = site + "/api/v1/" + key;
 
     // handlebars stuff
     var tableTmpl = Handlebars.compile($("#exercise-table-tmpl").html());
@@ -9,7 +10,6 @@ $(function() {
     // var iframe = $("#exercise-preview");
 
     var fetchData = function() {
-        console.log("fetch data called");
         $.ajax({
             url: url,
             success: function(data, textStatus, jqXHR) {
@@ -30,11 +30,8 @@ $(function() {
                 });
 
                 loadData();
-
-                console.log("fetched data!");
             },
             error: function() {
-                console.log("failed to get data from server!");
             }
         });
     };
@@ -50,16 +47,22 @@ $(function() {
 
         var html = tmpl({"exercises": exercises});
 
-        // $("body").append(html);
-
         // add to DOM
-        $("#exercise-table-holder").append(html);
+        $("#holder").append(html);
+
+        var fuzzyOptions = {
+            searchClass: ".search",
+            location: 0,
+            distance: 100,
+            threshold: 0.2,
+            multiSearch: true
+        };
 
         // add listjs goodness
         var options = {
-            valueNames: ["display-name", "creation-date", "author-name"],
+            valueNames: ["display-name"],
             plugins: [
-                [ "fuzzySearch" ]
+                [ "fuzzySearch", fuzzyOptions ]
             ]
         };
 
@@ -71,9 +74,9 @@ $(function() {
             exerciseList.fuzzySearch($(this).val());
         });
 
-        searchbar.typeahead({
-            source: _.pluck(exercises, "display_name")
-        });
+        // searchbar.typeahead({
+        //     source: _.pluck(exercises, "display_name")
+        // });
 
         var preview = $("#myModal");
         var modalTitle = $("#myModalLabel");
@@ -85,11 +88,22 @@ $(function() {
             show: false
         });
 
-        $(".thumbnails").on("click", ".thumbnail", function(e) {
-            var relativeUrl = $(this).data("filename");
+        $(".thumbnails").on({
+            mouseover: function(e) {
+                $(this).find(".toolbar").css("visibility", "visible");
+            },
+
+            mouseout: function(e) {
+                $(this).find(".toolbar").css("visibility", "hidden");
+            }
+        }, ".thumbnail");
+
+        $(".thumbnails").on("click", ".thumbnail .preview-btn", function() {
+            var thumbnail = $(this).parents(".thumbnail");
+            var relativeUrl = thumbnail.data("filename");
             iframe.attr("src", baseUrl + relativeUrl + "?debug");
 
-            var title = $(this).data("name");
+            var title = thumbnail.data("name");
             modalTitle.html(title);
             preview.modal("show");
         });
@@ -107,14 +121,6 @@ $(function() {
         preview.on("hidden", function() {
             body.css({ overflow: "inherit" });
         });
-
-        // add DataTables goodness
-        // $("#exercise-table").dataTable();
-
-        // // bind click handler to preview-links
-        // $("body").on("click", ".preview-link", function() {
-        //     iframe.attr("src", $(this).data("url"));
-        // });
     };
 
     loadData();
