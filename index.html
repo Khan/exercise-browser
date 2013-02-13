@@ -20,15 +20,15 @@
             background: #666E75;
         }
         .controls {
-            margin: 20px auto;
-            /*margin-bottom: 20px;*/
+            margin: 30px auto;
+            width: 400px;
         }
 
         .span4 {
             width: 250px; /* remove when we have bigger screenshots */
         }
 
-        .thumbnail {
+        .box {
             float: left;
             height: 310px;
             display: inline-block;
@@ -41,15 +41,15 @@
             position: relative;
         }
 
-        .thumbnail:hover {
+        .box:hover {
             /*background: #55595D;*/
         }
 
-        .thumbnail:hover .caption {
+        .box:hover .caption {
             color: #eee;
         }
 
-        .thumbnail .caption {
+        .box .caption {
             box-sizing: border-box;
             color: #AEBEC6;
             width: 256px;
@@ -118,10 +118,10 @@
             </div>
         </div>
         <div id="exercise-list">
-            <div class="list thumbnails">
+            <div class="list boxes">
                 {{#each exercises}}
                 <div class="span4">
-                    <div class="thumbnail" data-name="{{display_name}}" data-filename="{{guaranteed_file_name}}" data-ka-url="{{ka_url}}">
+                    <div class="box" data-name="{{display_name}}" data-filename="{{guaranteed_file_name}}" data-ka-url="{{ka_url}}">
                         <div class="screenshot">
                             <img src="{{image_url_256}}" alt=""/>
                             <div class="toolbar">

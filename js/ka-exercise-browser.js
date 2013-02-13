@@ -88,7 +88,7 @@ $(function() {
             show: false
         });
 
-        $(".thumbnails").on({
+        $(".boxes").on({
             mouseover: function(e) {
                 $(this).find(".toolbar").css("visibility", "visible");
             },
@@ -96,14 +96,14 @@ $(function() {
             mouseout: function(e) {
                 $(this).find(".toolbar").css("visibility", "hidden");
             }
-        }, ".thumbnail");
+        }, ".box");
 
-        $(".thumbnails").on("click", ".thumbnail .preview-btn", function() {
-            var thumbnail = $(this).parents(".thumbnail");
-            var relativeUrl = thumbnail.data("filename");
+        $(".boxes").on("click", ".box .preview-btn", function() {
+            var box = $(this).parents(".box");
+            var relativeUrl = box.data("filename");
             iframe.attr("src", baseUrl + relativeUrl + "?debug");
 
-            var title = thumbnail.data("name");
+            var title = box.data("name");
             modalTitle.html(title);
             preview.modal("show");
         });
