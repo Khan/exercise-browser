@@ -10,9 +10,11 @@ $(function() {
     // var iframe = $("#exercise-preview");
 
     var fetchData = function() {
+        console.log("sending data request");
         $.ajax({
             url: url,
             success: function(data, textStatus, jqXHR) {
+                console.log("data fetched");
 
                 data = _.map(data, function(exercise) {
                     var date = exercise["creation_date"];
@@ -32,6 +34,7 @@ $(function() {
                 loadData();
             },
             error: function() {
+                console.log("error in fetching data");
             }
         });
     };
@@ -44,6 +47,8 @@ $(function() {
             fetchData();
             return;
         }
+
+        console.log("rendering page");
 
         var html = tmpl({"exercises": exercises});
 
@@ -81,7 +86,7 @@ $(function() {
         var preview = $("#myModal");
         var modalTitle = $("#myModalLabel");
         var iframe = $("iframe.exercise-preview");
-        var baseUrl = "/khan-exercises/exercises/";
+        var baseUrl = "./khan-exercises/exercises/";
         var body = $("body");
 
         preview.modal({
