@@ -101,10 +101,7 @@ $(function() {
         $(".boxes").on("click", ".box .preview-btn", function() {
             var box = $(this).parents(".box");
             var relativeUrl = box.data("filename");
-            iframe.attr("src", baseUrl + relativeUrl + "?debug");
-
-            var title = box.data("name");
-            modalTitle.html(title);
+            iframe.attr("src", baseUrl + relativeUrl + "?browse");
             preview.modal("show");
         });
 
