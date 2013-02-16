@@ -18,10 +18,11 @@ $(function() {
 
                 data = _.map(data, function(exercise) {
                     var date = exercise["creation_date"];
-                    date = date.substring(0, 10);
-                    exercise["creation_date"] = date;
+                    if (date) {
+                        date = date.substring(0, 10);
+                        exercise["creation_date"] = date;
+                    }
                     return exercise;
-                    // var day = moment(date, "YYYY-MM-DD");
                 });
 
                 // set time-to-live to 5 hours
@@ -103,7 +104,7 @@ $(function() {
             }
         }, ".box");
 
-        $(".boxes").on("click", ".box .preview-btn", function() {
+        $(".boxes").on("click", ".box .screenshot", function() {
             var box = $(this).parents(".box");
             var relativeUrl = box.data("filename");
             iframe.attr("src", baseUrl + relativeUrl + "?browse");

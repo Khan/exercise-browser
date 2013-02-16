@@ -105,6 +105,10 @@
             visibility: hidden;
         }
 
+        .screenshot {
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -125,12 +129,9 @@
                         <div class="screenshot">
                             <img src="{{image_url_256}}" alt=""/>
                             <div class="toolbar">
-                                <a class="btn btn-small" href="{{ka_url}}" target="_new">
+                                <a class="btn btn-small btn-success" href="{{ka_url}}" target="_new">
                                     View on Khan Academy
                                 </a>
-                                <button class="btn btn-warning preview-btn">
-                                    Preview
-                                </button>
                             </div>
                         </div>
                         <div class="caption">
