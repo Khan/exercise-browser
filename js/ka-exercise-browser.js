@@ -4,10 +4,7 @@ $(function() {
     var url = site + "/api/v1/" + key;
 
     // handlebars stuff
-    var tableTmpl = Handlebars.compile($("#exercise-table-tmpl").html());
-    var thumbTmpl = Handlebars.compile($("#exercise-thumb-tmpl").html());
-
-    // var iframe = $("#exercise-preview");
+    var tmpl = Handlebars.compile($("#exercise-boxes-tmpl").html());
 
     var fetchData = function() {
         console.log("sending data request");
@@ -40,8 +37,6 @@ $(function() {
         });
     };
 
-    var tmpl = thumbTmpl;
-
     var loadData = function() {
         var exercises = $.jStorage.get(key);
         if (!exercises) {
@@ -54,7 +49,8 @@ $(function() {
         var html = tmpl({"exercises": exercises});
 
         // add to DOM
-        $("#holder").append(html);
+        $("#holder .loading-bar").css("display", "none");
+        $("#exercise-list").html(html);
 
         var fuzzyOptions = {
             searchClass: ".search",
