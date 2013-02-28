@@ -12,6 +12,7 @@
 
     <script src="js/underscore-min.js"></script>
     <script src="js/handlebars.js"></script>
+    <script src="js/moment.min.js"></script>
     <script src="js/jstorage.js"></script>
 
     <script type="text/javascript">
@@ -146,7 +147,12 @@
                         </div>
                     </div>
                     <div class="caption">
-                        <p class="display-name">{{display_name}}</p>
+                        <p class="display-name">
+                            {{#if is_new }}
+                            <span class="label label-warning">NEW!</span>
+                            {{/if}}
+                            {{display_name}}
+                        </p>
                         <p class="creation-date">Created: {{creation_date}}</p>
                         <p class="author-name">{{author_name}}</p>
                         <p class="topic"></p>

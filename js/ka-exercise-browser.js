@@ -13,11 +13,23 @@ $(function() {
             success: function(data, textStatus, jqXHR) {
                 console.log("data fetched");
 
+                var now = moment();
+
                 data = _.map(data, function(exercise) {
                     var date = exercise["creation_date"];
+                    exercise["is_new"] = false;
+
                     if (date) {
                         date = date.substring(0, 10);
                         exercise["creation_date"] = date;
+
+                        // add "NEW!" span if the exercise was published
+                        // less than two months ago
+                        var day = moment(date, "YYYY-MM-DD");
+                        var daysAgo = now.diff(day, "days");
+                        if (daysAgo <= 60) {
+                            exercise["is_new"] = true;
+                        }
                     }
                     return exercise;
                 });
