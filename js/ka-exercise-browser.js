@@ -49,7 +49,7 @@ $(function() {
         var html = tmpl({"exercises": exercises});
 
         // add to DOM
-        $("#holder .loading-bar").css("display", "none");
+        $("#exercise-list-holder .loading-bar").css("display", "none");
         $("#exercise-list").html(html);
 
         var fuzzyOptions = {
@@ -68,14 +68,16 @@ $(function() {
             ]
         };
 
-        var exerciseList = new List("exercise-list", options);
+        var exerciseList = new List("exercise-list-holder", options);
 
         var searchbar = $(".search");
 
-        searchbar.keyup(function() {
-            exerciseList.fuzzySearch($(this).val());
-        });
+        // disable fuzzy search for now
+        // searchbar.keyup(function() {
+        //     exerciseList.fuzzySearch($(this).val());
+        // });
 
+        // disable typeahead for now
         // searchbar.typeahead({
         //     source: _.pluck(exercises, "display_name")
         // });
