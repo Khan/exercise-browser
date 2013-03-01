@@ -71,6 +71,7 @@
         }
 
         .box .caption {
+            -moz-box-sizing: border-box;
             box-sizing: border-box;
             color: #AEBEC6;
             width: 256px;
@@ -102,20 +103,22 @@
 
         .modal-body {
             max-height: 600px;
-            width: 800px;
+            overflow: visible;  /* override bootstrap */
             padding: 0 0 0 30px;
             position: absolute;
+            width: 800px;
         }
 
         iframe.exercise-preview {
-            overflow-x: hidden;
-            overflow-y: auto;
+            border: 0;
         }
 
         .screenshot {
-            position: relative;
-            height: 256px;
             background: #fff; /* make image loading less obvious */
+            cursor: pointer;
+            height: 256px;
+            position: relative;
+            width: 256px;
         }
 
         .toolbar {
@@ -124,10 +127,6 @@
             right: 0;
             padding: 8px;
             visibility: hidden;
-        }
-
-        .screenshot {
-            cursor: pointer;
         }
 
     </style>

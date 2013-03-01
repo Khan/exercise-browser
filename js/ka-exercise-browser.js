@@ -7,12 +7,10 @@ $(function() {
     var tmpl = Handlebars.compile($("#exercise-boxes-tmpl").html());
 
     var fetchData = function() {
-        console.log("sending data request");
         $.ajax({
             url: url,
+            dataType: "jsonp",
             success: function(data, textStatus, jqXHR) {
-                console.log("data fetched");
-
                 var now = moment();
 
                 data = _.map(data, function(exercise) {
@@ -42,9 +40,6 @@ $(function() {
                 });
 
                 loadData();
-            },
-            error: function() {
-                console.log("error in fetching data");
             }
         });
     };
@@ -55,8 +50,6 @@ $(function() {
             fetchData();
             return;
         }
-
-        console.log("rendering page");
 
         var html = tmpl({"exercises": exercises});
 
