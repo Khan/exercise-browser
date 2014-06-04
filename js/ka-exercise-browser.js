@@ -1,6 +1,6 @@
 $(function() {
     var key = "exercises";
-    var site = "http://www.khanacademy.org"; // znd-exercises-topics-dot-khan-academy.appspot.com
+    var site = "https://www.khanacademy.org"; // znd-exercises-topics-dot-khan-academy.appspot.com
     var url = site + "/api/v1/" + key;
 
     // handlebars stuff
